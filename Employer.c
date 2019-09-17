@@ -1,8 +1,13 @@
+//This is one of the First C programs that I ever wrote. This is also among the first peices of software that I have written in general.
+
+
 #include <stdlib.h>
-#include <stdio.h>
+#include <stdio.h> 
 #include <string.h>
 #include <ctype.h>
 
+
+//This is our template for our main pointer. It holds the date type for Employees
 struct xrec {
 char firstName[30];
 char lastName[30];
@@ -16,15 +21,15 @@ struct xrec *next; //otherwise his/her own SSN is stored
 typedef struct xrec employee;
 
 
-
-void quit(employee * EmployeeAddress);
-void showmarriage(employee *EmployeeAddress);
-void highestsalary(employee * EmployeeAddress);
-employee * deleteemployee(employee * EmployeeAddress);
-employee * AddEmployee(employee * EmployeeAddress, employee temp);
-employee * tempemployee(employee * EmployeeAddress);
-int listemployees(employee *EmployeeAddress);
-int displaymenu(void);
+////Prototypes
+void quit(employee * EmployeeAddress); //Function for Employee who quits
+void showmarriage(employee *EmployeeAddress); //Function for Hanling Employees who are married
+void highestsalary(employee * EmployeeAddress); //Function for Sorting, who has the highest pay
+employee * deleteemployee(employee * EmployeeAddress);//Deleting employee memory handle
+employee * AddEmployee(employee * EmployeeAddress, employee temp);//Temp Add Employee Handler
+employee * tempemployee(employee * EmployeeAddress); //Temp employee  handler to generate linked list
+int listemployees(employee *EmployeeAddress);// Employee count
+int displaymenu(void); 
 void listfemales(employee * EmployeeAddress);
 void listovertime(employee * EmployeeAddress);
 employee * alphabetize(employee * EmployeeAddress, int number);
@@ -32,7 +37,7 @@ void addmarriage(employee * EmployeeAddress);
 void divorce(employee * EmployeeAddress);
 void ImAFunction(int function);
 
-
+//Main, this is generally Just a looping function.
 int main(void){
 FILE * infile;//This is a pointer (Address) for the file.\
 			  //The Pointer might be null or not null (ie, Ex90029)
@@ -68,16 +73,16 @@ fclose(infile); //similar to
 
 do {
 menu=displaymenu();
-
+//Interactions with user will occur here. 
 switch (menu){
-case 1: listemployees(EmployeeAddress); break;              
-case 2: EmployeeAddress=tempemployee(EmployeeAddress); number++; break;
-case 3: EmployeeAddress=deleteemployee(EmployeeAddress); number--; break;
-case 4: listfemales(EmployeeAddress); break;
-case 5: listovertime(EmployeeAddress); break;
-case 6: EmployeeAddress=alphabetize(EmployeeAddress, number); break;
-case 7: highestsalary(EmployeeAddress); break;
-case 11: quit(EmployeeAddress); break;          
+case 1: listemployees(EmployeeAddress); break;   //Press one to list all employees            
+case 2: EmployeeAddress=tempemployee(EmployeeAddress); number++; break; //Press two to add new employee
+case 3: EmployeeAddress=deleteemployee(EmployeeAddress); number--; break;//Press two to delete employee
+case 4: listfemales(EmployeeAddress); break; //Sort females
+case 5: listovertime(EmployeeAddress); break; //Sort overtime
+case 6: EmployeeAddress=alphabetize(EmployeeAddress, number); break;//list in alphabetical order
+case 7: highestsalary(EmployeeAddress); break;//Locate highest salary
+case 11: quit(EmployeeAddress); break;//Exit program/Empty memory    
 default: printf("Bad input\n");}
 }
 while (menu!=11);
@@ -99,7 +104,7 @@ new->next=EmployeeAddress;
 return new;
 }
 
-
+//Just a general list for visuallizoing employee tracker
 int displaymenu(void){
 int c;
 
